@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Responder
 {
     Random aleatorio;
-    HashMap<String, String> respuestasInput;
+    HashMap<HashSet<String>, String> respuestasInput;
     ArrayList <String> respuestas;
     /**
      * Construct a Responder - nothing to do
@@ -29,24 +29,35 @@ public class Responder
         respuestas.add(" no me importa");
         respuestas.add(" hablamos mas tarde");
 
-        respuestasInput.put("hola", "hola que tal");
-        respuestasInput.put("oferta", "lo siento no me interesa");
-        respuestasInput.put("viagra", "gracias pero funciono bien XD");
-        respuestasInput.put("importante", "me pondre en contacto contigo lo mas rapido posible");
+        HashSet<String> set01 = new HashSet<>();
+        set01.add("hola");   
+        
+        HashSet<String> set02 = new HashSet<>();
+        set02.add("oferta");
+        set02.add("gratis");  
+        
+        HashSet<String> set03 = new HashSet<>();
+        set03.add("viagra");
+        set03.add("alargador");
+        
+        HashSet<String> set04 = new HashSet<>();
+        set04.add("importante");
+        set04.add("urgente");
+        
+        respuestasInput.put(set01, "hola que tal");
+        respuestasInput.put(set02, "lo siento no me interesa");
+        respuestasInput.put(set03, "gracias pero funciono bien XD");
+        respuestasInput.put(set04, "me pondre en contacto contigo lo mas rapido posible");
     }
 
     /**
      * Generate a response.
      * @return   A string that should be displayed as the response
      */
-    public String generateResponse(HashSet<String> input)
+    public String generateResponse(HashSet<String> userInput)
     {   
         String respuesta = null;        
-        String fraseInputUser= "";
-        for(String elemento : input){
-            fraseInputUser= elemento;
-        }
-        respuesta = respuestasInput.get(input);
+        respuesta = respuestasInput.get(userInput);
         if(respuesta == null)
         {
             respuesta = respuestas.get(aleatorio.nextInt(respuestas.size()));
