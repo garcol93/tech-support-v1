@@ -21,29 +21,24 @@ public class Responder
     public Responder()
     {
         aleatorio = new Random();
+        cearRespuestasAleatorias();
         respuestasInput = new HashMap<>();
-        respuestas = new ArrayList<>();
-        respuestas.add(" venga hasta luegoooo");
-        respuestas.add(" muy interesante pero....");
-        respuestas.add(" estoy ocupado, estoy con Ana");
-        respuestas.add(" no me importa");
-        respuestas.add(" hablamos mas tarde");
 
         HashSet<String> set01 = new HashSet<>();
         set01.add("hola");   
-        
+
         HashSet<String> set02 = new HashSet<>();
         set02.add("oferta");
         set02.add("gratis");  
-        
+
         HashSet<String> set03 = new HashSet<>();
         set03.add("viagra");
         set03.add("alargador");
-        
+
         HashSet<String> set04 = new HashSet<>();
         set04.add("importante");
         set04.add("urgente");
-        
+
         respuestasInput.put(set01, "hola que tal");
         respuestasInput.put(set02, "lo siento no me interesa");
         respuestasInput.put(set03, "gracias pero funciono bien XD");
@@ -59,9 +54,23 @@ public class Responder
         String respuesta = null;        
         respuesta = respuestasInput.get(userInput);
         if(respuesta == null)
-        {
-            respuesta = respuestas.get(aleatorio.nextInt(respuestas.size()));
-        }      
+        {    if(respuestas.size() >0){
+                respuesta = respuestas.remove(aleatorio.nextInt(respuestas.size()));          
+            }
+            else{
+                respuesta = " lo siento no le he entendido";
+            }
+        }   
         return respuesta;
+    }
+
+    private void cearRespuestasAleatorias()
+    {
+        respuestas = new ArrayList<>();
+        respuestas.add(" venga hasta luegoooo");
+        respuestas.add(" muy interesante pero....");
+        respuestas.add(" estoy ocupado, estoy con Ana");
+        respuestas.add(" no me importa");
+        respuestas.add(" hablamos mas tarde");
     }
 }
